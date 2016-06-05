@@ -1,0 +1,60 @@
+<style>
+  .avatar {
+    background-image: url("images/logo.png");
+    background-size: cover;
+    height: 140px;
+    width: 115px;
+  }
+  .form-box .form-control-alone {
+    border-radius: 5px 5px 5px 5px;
+  }
+</style>
+<div class="row">
+  <div class="col-xs-10 col-xs-offset-1">
+    <br class="unselectable"/>
+    <div class="pull-right" style="font-size: 20px;"><span class="fa fa-remove" ng-click="cancel()"></span></div>
+    <div class="avatar center-block"></div>
+    <br class="unselectable"/>
+    <br class="unselectable"/>
+    <div class="form-box">
+      <form name="ImageForm" novalidate>
+        <div class="row">
+          <div class="row">
+            <div class="form-group">
+              <div class="col-xs-10 col-xs-offset-1">
+                <div ng-class="ImageForm.image.$error.required ? 'has-error' : 'has-success'">
+                  <input type="text" class="form-control form-control-alone text-center" name="image" placeholder="Link dell'Immagine" required ng-model="image">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br class="unselectable"/>
+          <div class="form-group">
+            <div class="col-xs-6 col-xs-offset-3">
+              <button type="button" class="btn btn-block btn3d" ng-class="ImageForm.$error.required ? 'btn-danger' : 'btn-primary'" ng-click="updateImage(image)" ng-disabled="ImageForm.$error.required">Modifica Immagine</button>
+            </div>
+          </div>
+        </div>
+        <br class="unselectable"/>
+        <div class="row" ng-show="showSuccessMessage">
+          <div class="alert-group">
+              <div class="col-xs-10 col-xs-offset-1">
+                <div class="alert alert-success">
+                  <div class="text-center"><strong>{{message}}</strong></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <div class="row" ng-show="showErrorMessage">
+          <div class="alert-group">
+            <div class="col-xs-10 col-xs-offset-1">
+              <div class="alert alert-danger">
+                <div class="text-center"><strong>{{message}}</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

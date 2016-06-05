@@ -1,0 +1,54 @@
+<div ng-controller="AdministratorCtrl as administrator">
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            <div class="col-xs-10 col-xs-offset-1">
+                <form name="itemForm" novalidate>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <label for="InputName">Nome</label>
+                            <div class="input-group" ng-class="itemForm.name.$error.required ? 'has-error' : 'has-success'">
+                                <input type="text" class="form-control" name="name" id="InputName" placeholder="Inserisci il Nome" required ng-model="administrator.updatedItem.name">
+                                <span class="input-group-addon"><span class="fa fa-at"></span></span>
+                            </div>
+                            <hr/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <label for="InputDescription">Descrizione</label>
+                            <div ng-class="!administrator.updatedItem.description || administrator.updatedItem.description.length === 0 ? '' : 'has-success'">
+                                <textarea rows="3" class="form-control" name="description" id="InputDescription" placeholder="Inserisci la Descrizione" ng-model="administrator.updatedItem.description"></textarea>
+                            </div>
+                            <hr/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-8 col-xs-offset-2">
+                                <button class="btn btn-block" ng-class="itemForm.$error.required ? 'btn-danger' : 'btn-success'" ng-click="administrator.updateItem(administrator.updatedItem)" ng-disabled="itemForm.$error.required">Conferma</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6 col-xs-12" style="margin-top: 0.85%">
+            <div class="col-sm-10 col-sm-offset-1">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Nome</th>
+                            <th class="text-center">Descrizione</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-click="administrator.updatedItem.id = item.id; administrator.updatedItem.name = item.name; administrator.updatedItem.description = item.description" ng-repeat="item in administrator.items">
+                            <td class="col-xs-4 text-center">{{item.name}}</td>
+                            <td class="col-xs-8 text-center">{{item.description| limitTo : 75}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

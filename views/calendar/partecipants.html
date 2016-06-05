@@ -1,0 +1,28 @@
+<style>
+  .table {
+    margin-bottom: 0;
+  }
+  .well {
+    margin-bottom: 0;
+  }
+</style>
+<div class="row">
+  <div class="col-xs-10 col-xs-offset-1">
+    <div class="well">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="col-xs-6 text-center">Nome</th>
+            <th class="col-xs-6 text-center">Cognome</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="partecipant in event.partecipants | partecipants | orderBy:'lowerFirstName'">
+            <td class="col-xs-6 text-center">{{partecipant.firstName}}</td>
+            <td class="col-xs-6 text-center">{{partecipant.lastName}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

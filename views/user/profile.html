@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-md-4 col-md-offset-1 col-sm-3 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+    <div class="well">
+      <br class="unselectable"/>
+      <img class="center-block img-responsive unselectable" src="{{home.User.getUser().image}}">
+      <br class="unselectable"/>
+    </div>
+  </div>
+  <div class="col-md-5 col-md-offset-1 col-sm-6 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+    <div class="well">
+      <div class="row">
+        <div class="col-xs-10 col-xs-offset-1">
+          <div class="row">
+            <div class="row text-center">
+              <h1><label>{{home.User.getUser().firstName}} {{home.User.getUser().lastName}}</label></h1>
+            </div>
+            <br class="unselectable"/>
+            <br class="unselectable"/>
+            <div class="row text-center">
+              Email: <label>{{home.User.getUser().email}}</label>
+            </div>
+            <br class="unselectable"/>
+            <div class="row text-center">
+              Data di Nascita: <label><span ng-bind="home.Utility.stringToDate(home.User.getUser().birthdate) | date:'dd/MM/yyyy'"></span></label>
+            </div>
+            <br class="unselectable"/>
+            <div class="row text-center">
+              Ruolo: <label>{{home.User.getUser().role}}</label>
+            </div>
+            <br class="unselectable"/>
+            <div class="row text-center">
+              Sesso: <label>{{home.User.getUser().sex}}</label>
+            </div>
+            <br class="unselectable"/>
+            <br class="unselectable"/>
+            <div class="row text-center">
+              <button type="button" class="btn btn-primary btn-sm btn3d" ng-click="openUser('md', 'views/user/updateImage.html')">Modifica Immagine</button>
+              <button type="button" class="btn btn-primary btn-sm btn3d" ng-click="openUser('md', 'views/user/updateEmail.html')">Modifica Email</button>
+              <button type="button" class="btn btn-primary btn-sm btn3d" ng-click="openUser('md', 'views/user/updatePassword.html')">Modifica Password</button>
+            </div>
+            <div class="row text-center">
+              <button type="button" class="btn btn-danger btn-sm btn3d" ng-click="openUser('md', 'views/user/delete.html')">Elimina Utente</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

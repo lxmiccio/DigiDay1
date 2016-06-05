@@ -1,0 +1,41 @@
+<style>
+  a {
+    text-align: center !important;
+  }
+
+  .dropdown-toggle {
+    border-radius: 5px 5px 0px 0px;
+    height: 34px;
+  }
+
+  .filter-option, .special-title {
+    margin-left: 7px;
+    text-align: center !important;
+  }
+
+  .form-box .form-control-last {
+    border-radius: 0px 0px 5px 5px;
+    border-top: 0px;
+    margin-top: 0px;
+  }
+</style>
+<div class="row">
+  <div class="form-group">
+    <div class="col-xs-12">
+      <div ng-class="sessionForm.classroom.$error.required ? 'has-error' : 'has-success'">
+        <ol class="nya-bs-select form-control col-xs-12 text-center" name="classroom" title="Aula" required ng-change="setErrorForm2(newSession)" ng-model="newSession.classroom">
+          <li nya-bs-option="classroom in Existing.existing.classrooms | availableClassrooms:newSession.startingDate:newSession.endingDate | orderBy:'name'">
+            <a>{{classroom.name}}</a>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-xs-12">
+      <div ng-class="sessionForm.maxPartecipants.$error.required || newSession.maxPartecipants <= 0 || Form.isInvalidNumber(newSession.classroom.capacity, newSession.maxPartecipants) ? 'has-error' : 'has-success'">
+        <input type="text" class="form-control form-control-last text-center" name="maxPartecipants" placeholder="Partecipanti" required ng-change="setErrorForm2(newSession)" ng-model="newSession.maxPartecipants">
+      </div>
+    </div>
+  </div>
+</div>

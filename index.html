@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="DigiDayMdl">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="libraries/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+        <link href="libraries/startbootstrap-sb-admin-2/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="libraries/startbootstrap-sb-admin-2/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+        <link href="libraries/startbootstrap-sb-admin-2/dist/css/sb-admin-2.css" rel="stylesheet">
+        <link href="libraries/startbootstrap-sb-admin-2/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="libraries/bower_components/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
+        <link href="libraries/bower_components/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
+        <link href="libraries/bower_components/nya-bootstrap-select/dist/css/nya-bs-select.min.css" rel="stylesheet">
+        <link href="libraries/bower_components/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.min.css" rel="stylesheet">
+        <link href="libraries/font/icon.css" rel="stylesheet">
+        <link href="libraries/font/jura.css" rel="stylesheet">
+        <link href="css/btn3d.css" rel="stylesheet">
+        <link href="css/unselectable.css" rel="stylesheet">
+        <script src="libraries/bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="libraries/bower_components/momentjs/min/moment.min.js"></script>
+        <script src="libraries/bower_components/momentjs/min/moment-with-locales.min.js"></script>
+        <script src="libraries/bower_components/angular/angular.min.js"></script>
+        <script src="libraries/bower_components/angular/ui-bootstrap-tpls-1.3.2.min.js"></script>
+        <script src="libraries/bower_components/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar-tpls.min.js"></script>
+        <script src="libraries/bower_components/angular-route/angular-route.js"></script>
+        <script src="libraries/bower_components/angular-ui-calendar/src/calendar.js"></script>
+        <script src="libraries/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script src="libraries/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="libraries/bower_components/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+        <script src="libraries/bower_components/bootstrap-show-password/bootstrap-show-password.min.js"></script>
+        <script src="libraries/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+        <script src="libraries/bower_components/fullcalendar/dist/gcal.js"></script>
+        <script src="libraries/bower_components/fullcalendar/dist/lang/it.js"></script>
+        <script src="libraries/bower_components/nya-bootstrap-select/dist/js/nya-bs-select.min.js"></script>
+        <script src="libraries/startbootstrap-sb-admin-2/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+        <script src="libraries/startbootstrap-sb-admin-2/dist/js/sb-admin-2.js"></script>
+
+
+
+        <script src="js/digiday/DigiDay.js"></script>
+        <script src="js/controller/AdministratorController.js"></script>
+        <script src="js/controller/CalendarController.js"></script>
+        <script src="js/controller/SessionController.js"></script>
+        <script src="js/factories/Module.js"></script>
+        <script src="js/factories/Events.js"></script>
+        <script src="js/factories/Existing.js"></script>
+        <script src="js/factories/Form.js"></script>
+        <script src="js/factories/User.js"></script>
+        <script src="js/factories/Utility.js"></script>
+
+        <script src="js/filters/Module.js"></script>
+        <script src="js/filters/Available.js"></script>
+        <script src="js/filters/Capitalize.js"></script>
+
+
+
+        <style media="screen" type="text/css">@import 'font/Cartwheel/stylesheet.css';</style>
+        <style type="text/css">
+            @font-face {
+                font-family: "Arkhip_font.ttf";
+                src: url("font/Arkhip.ttf");
+            }
+
+            .error {
+                color: red;
+                font-size: 10px;
+            }
+
+            .modal-content {
+                padding-bottom: 3%;
+                padding-top: 3%;
+            }
+
+            #wrapper {
+                background: #FFFFFF;
+            }
+
+            .well {
+                margin-bottom: 15px;
+            }
+        </style>
+    </head>
+    <body  ng-controller="HomeCtrl as home" style="font-family: 'Arkhip'">
+        <div id="wrapper">
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <!--
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                       <span class="sr-only">Toggle navigation</span>
+                       <span class="icon-bar"></span>
+                       <span class="icon-bar"></span>
+                       <span class="icon-bar"></span>
+                    </button>
+                    -->
+                    <a class="navbar-brand" href="#/" style="color: black; font-size: 25px; font-family: 'Cartwheel'"><div class="col-xs-4"><img class="" height="25px" width="20px" src="images/digiday_colored.png"/></div><div class="col-xs-4">DigiDAY</div></a>
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li class="dropdown pull-right">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="" ng-show="home.User.isAuthenticated()">
+                            <i class="fa fa-user fa-fw"></i>&nbsp;&nbsp;&nbsp;<strong>{{home.User.getUser().firstName}} {{home.User.getUser().lastName}}</strong>&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="" ng-hide="home.User.isAuthenticated()">
+                            <i class="fa fa-user fa-fw"></i><i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a ng-click="openUser('md', 'views/user/login.html')" ng-hide="home.User.isAuthenticated()"><i class="fa fa-sign-in fa-fw"></i> Accedi</a></li>
+                            <li><a ng-click="openUser('lg', 'views/user/create.html')" ng-hide="home.User.isAuthenticated()"><i class="fa fa-user-plus fa-fw"></i> Registrati</a></li>
+                            <li><a href="#/utente" ng-show="home.User.isAuthenticated()"><i class="fa fa-info-circle fa-fw"></i> Profilo</a></li>
+                            <li><a href="#" ng-click="home.User.logout()" ng-show="home.User.isAuthenticated()"><i class="fa fa-sign-out fa-fw"></i> Esci</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown pull-right">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="">
+                            <i class="fa fa-book fa-fw"></i>
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a ui-sref="session" ng-click="openEvent('lg', 'views/session/session.html')"><i class="fa fa-book fa-fw"></i> Crea sessione</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown pull-right">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="">
+                            <i class="fa fa-calendar fa-fw"></i>
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#/"><i class="fa fa-calendar fa-fw"></i> Visualizza calendario</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown pull-right"></li>
+                </ul>
+                <!--
+                <div class="navbar-default sidebar" role="navigation">
+                    <div class="sidebar-nav navbar-collapse">
+                        <ul class="nav" id="side-menu">
+                            <li class="sidebar-search">
+                                <div class="input-group custom-search-form">
+                                    <input type="text" class="form-control" placeholder="Search...">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                            </li>
+                            <li><a href="#/"><i class="fa fa-home fa-fw"></i> Home</a></li>
+                            <li>
+                                <a href=""><i class="fa fa-graduation-cap fa-fw"></i> Sessione<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="#/sessione/crea">Crea</a>
+                                    </li>
+                                    <li>
+                                        <a href="morris.html">Partecipa</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                !-->
+            </nav>
+            <!--
+            <div id="page-wrapper">
+            -->
+            <div class="container-fluid">
+                <br/><br/>
+                <div ng-view=""></div>
+                <br/>
+            </div>
+            <!--
+            </div>
+            -->
+        </div>
+    </body>
+</html>

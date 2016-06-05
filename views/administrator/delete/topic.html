@@ -1,0 +1,20 @@
+<div ng-controller="AdministratorCtrl as administrator">
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">Ambito</th>
+                        <th class="text-center">Descrizione</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-click="administrator.deleteTopic(topic)" ng-repeat="topic in administrator.topics">
+                        <td class="col-xs-4 text-center">{{topic.scope}}</td>
+                        <td class="col-xs-8 text-center">{{topic.description| limitTo : 75}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

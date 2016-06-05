@@ -1,0 +1,145 @@
+<script>
+  $(document).ready(function () {
+    $("#birthdate").bootstrapMaterialDatePicker({
+      cancelText: "Annulla",
+      lang: "it",
+      maxDate: new Date(),
+      okText: "Conferma",
+      time: false
+    });
+  });
+</script>
+<style>
+  a {
+    text-align: center !important;
+  }
+  .avatar {
+    background-image: url("images/logo.png");
+    background-size: cover;
+    height: 75px;
+    width: 60px;
+  }
+  .dropdown-toggle {
+    border-radius: 0px 0px 0px 0px;
+    border-top: 0;
+  }
+  .filter-option, .special-title {
+    margin-left: 7px;
+    text-align: center !important;
+  }
+  .form-box .form-control-first {
+    border-radius: 5px 5px 0px 0px;
+  }
+  .form-box .form-control-middle {
+    border-radius: 0px 0px 0px 0px;
+    border-top: 0;
+  }
+  .form-box .form-control-last {
+    border-radius: 0px 0px 5px 5px;
+    border-top: 0;
+  }
+</style>
+<div class="row">
+  <div class="col-xs-10 col-xs-offset-1">
+    <br class="unselectable"/>
+    <div class="pull-right" style="font-size: 20px;"><span class="fa fa-remove" ng-click="cancel()"></span></div>
+    <div class="avatar center-block"></div>
+    <br class="unselectable"/>
+    <br class="unselectable"/>
+    <div class="form-box">
+      <form name="registrationForm">
+        <div class="row">
+          <div class="row">
+            <div class="form-group">
+              <div class="col-xs-10 col-xs-offset-1">
+                <div ng-class="registrationForm.fresher.$error.required || Form.isExistingFresher(newUser.fresher) ? 'has-error' : 'has-success'">
+                  <input type="text" class="form-control form-control-first text-center" name="fresher" placeholder="Matricola" required ng-model="newUser.fresher">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-10 col-xs-offset-1">
+                <div ng-class="registrationForm.password.$error.required ? 'has-error' : 'has-success'">
+                  <input type="password" class="form-control form-control-middle text-center" name="password" placeholder="Password" required ng-model="newUser.password">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-10 col-xs-offset-1">
+                <div ng-class="registrationForm.firstName.$error.required ? 'has-error' : 'has-success'">
+                  <input type="text" class="form-control form-control-middle text-center" name="firstName" placeholder="Nome" required ng-model="newUser.firstName">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-10 col-xs-offset-1">
+                <div ng-class="registrationForm.lastName.$error.required ? 'has-error' : 'has-success'">
+                  <input type="text" class="form-control form-control-middle text-center" name="lastName" placeholder="Cognome" required ng-model="newUser.lastName">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-10 col-xs-offset-1">
+                <div ng-class="registrationForm.email.$error.required || Form.isInvalidEmail(newUser.email) || Form.isExistingEmail(newUser.email) ? 'has-error' : 'has-success'">
+                  <input type="text" class="form-control form-control-middle text-center" name="email" placeholder="Email" required ng-model="newUser.email">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-10 col-xs-offset-1">
+                <div ng-class="registrationForm.sex.$error.required ? 'has-error' : 'has-success'">
+                  <ol class="nya-bs-select form-control form-control-middle col-xs-12 text-center" name="sex" title="Sesso" required ng-model="newUser.sex">
+                    <li class="nya-bs-option" data-value="Donna"><a>Donna</a></li>
+                    <li class="nya-bs-option" data-value="Uomo"><a>Uomo</a></li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-10 col-xs-offset-1">
+                <div ng-class="registrationForm.role.$error.required ? 'has-error' : 'has-success'">
+                  <ol class="nya-bs-select form-control form-control-middle col-xs-12 text-center" name="role" title="Ruolo" required ng-model="newUser.role">
+                    <li class="nya-bs-option" data-value="Docente"><a>Docente</a></li>
+                    <li class="nya-bs-option" data-value="Studente"><a>Studente</a></li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-10 col-xs-offset-1">
+                <div ng-class="registrationForm.birthdate.$error.required ? 'has-error' : 'has-success'">
+                  <input type="text" class="form-control form-control-last text-center" name="birthdate" id="birthdate" placeholder="Data di Nascita" required ng-model="newUser.birthdate">
+                </div>
+              </div>
+            </div>
+          </div>
+          <br class="unselectable"/>
+          <div class="form-group">
+            <div class="col-xs-6 col-xs-offset-3">
+              <button type="button" class="btn btn-block btn3d" ng-class="registrationForm.$error.required || Form.isExistingFresher(newUser.fresher) || Form.isInvalidEmail(newUser.email) || Form.isExistingEmail(newUser.email) ? 'btn-danger' : 'btn-primary'" ng-click="create(newUser)" ng-disabled="registrationForm.$error.required || Form.isExistingFresher(newUser.fresher) || Form.isInvalidEmail(newUser.email) || Form.isExistingEmail(newUser.email)">Registrati</button>
+            </div>
+          </div>
+        </div>
+        <br class="unselectable"/>
+        <div class="row" ng-show="showSuccessMessage">
+          <div class="alert-group">
+            <div class="col-xs-10 col-xs-offset-1">
+              <div class="alert alert-success">
+                <div class="text-center"><strong>{{message}}</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" ng-show="showErrorMessage">
+          <div class="alert-group">
+            <div class="col-xs-10 col-xs-offset-1">
+              <div class="alert alert-danger">
+                <div class="text-center"><strong>{{message}}</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

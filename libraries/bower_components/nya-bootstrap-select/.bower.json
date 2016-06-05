@@ -1,0 +1,44 @@
+{
+  "name": "nya-bootstrap-select",
+  "version": "2.1.5",
+  "main": [
+    "dist/js/nya-bs-select.js",
+    "dist/css/nya-bs-select.css"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "examples",
+    "src",
+    "docs"
+  ],
+  "keywords": [
+    "bootstrap",
+    "bootstrap-select",
+    "dropdown",
+    "angular"
+  ],
+  "dependencies": {
+    "angular": ">=1.2"
+  },
+  "devDependencies": {
+    "jquery": "~2.1.1",
+    "bootstrap": "~3.3.0",
+    "angular-mocks": "*",
+    "angular-ui-router": "~0.2.11",
+    "angular-translate": "^2.9.0"
+  },
+  "homepage": "https://github.com/lordfriend/nya-bootstrap-select",
+  "_release": "2.1.5",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.1.5",
+    "commit": "cf1f17ad5ac3c571f2a55bbd71086da69543e79d"
+  },
+  "_source": "https://github.com/lordfriend/nya-bootstrap-select.git",
+  "_target": "^2.1.5",
+  "_originalSource": "nya-bootstrap-select",
+  "_direct": true
+}
