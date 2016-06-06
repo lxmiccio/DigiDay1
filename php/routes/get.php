@@ -119,7 +119,7 @@ $router->get("DigiDay/php/routes/get.php/items", function() {
       foreach ($items as &$item) {
         if ($item["id"] == $row["id"]) {
           $added = true;
-          if(!is_array($item["sessions"])) {
+          if(!is_array($item["events"])) {
             $item["events"] = array();
           }
           $item["events"][] = array(
@@ -138,8 +138,8 @@ $router->get("DigiDay/php/routes/get.php/items", function() {
           "events" => null
         );
         if (isset($row["startingDate"]) || isset($row["endingDate"])) {
-          if(!is_array($item["sessions"])) {
-            $item[count($items) - 1]["events"] = array();
+          if(!is_array($items[count($items) - 1]["events"])) {
+            $items[count($items) - 1]["events"] = array();
           }
           $items[count($items) - 1]["events"] = array(
             array(

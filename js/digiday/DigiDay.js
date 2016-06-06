@@ -34,7 +34,7 @@ angular.module("DigiDayMdl", ["Factories", "Filters", "ngRoute", "mwl.calendar",
   });
 })
 
-.controller('formController', function ($http, $scope, Existing) {
+.controller('formController', function ($http, $scope, $timeout, Existing) {
 
   $scope.Existing = Existing;
 
@@ -84,25 +84,7 @@ angular.module("DigiDayMdl", ["Factories", "Filters", "ngRoute", "mwl.calendar",
 
   $scope.setErrorForm3 = function (session) {
     $scope.errorForm3 = false;
-    if(session.items && session.items.length > 0) {
-      if($scope.requiredItems && $scope.requiredItems.length > 0) {
-        $scope.requiredItems.forEach(function (entry, index) {
-          if(entry.required > 0) {
-            Existing.existing.items.forEach(function (entry1) {
-              if(entry1.id == index) {
-                if(parseInt(entry.required) > parseInt(entry1.amount)) {
-                  $scope.errorForm3 = true;
-                }
-              }
-            });
-          } else {
-            $scope.errorForm3 = true;
-          }
-        });
-      } else {
-        $scope.errorForm3 = true;
-      }
-    }
+
   };
 
   $scope.setErrorForm4 = function (session) {
@@ -113,17 +95,20 @@ angular.module("DigiDayMdl", ["Factories", "Filters", "ngRoute", "mwl.calendar",
     }
   };
 
-  $scope.create = function (session) {
-    $http.post("/DigiDay/php/router.php/session/create", {session: session})
-    .success(function (data, status, headers, config) {
-      if (data.error) {
-        console.log(data);
-      } else {
-        console.log(data);
-      }
-    })
-    .error(function (data, status, headers, config) {
-      console.log(data);
+  $scope.create = function (event) {
+    $scope.Events.create(event, function (message) {
+      $scope.showSuccessMessage = true;
+      $scope.message = message;
+      $timeout(function () {
+        $scope.showSuccessMessage = false;
+        $scope.cancel();
+      }, 500);
+    }, function (message) {
+      $scope.showErrorMessage = true;
+      $scope.message = message;
+      $timeout(function () {
+        $scope.showErrorMessage = false;
+      }, 2500);
     });
   };
 })
@@ -266,12 +251,10 @@ angular.module("DigiDayMdl", ["Factories", "Filters", "ngRoute", "mwl.calendar",
   $scope.openEvent = function (size, view) {
     var modalInstance = $uibModal.open({
       animation: true,
-      controller: function ($http, $scope, $timeout, $uibModalInstance, Existing, Events, Form, User) {
+      controller: function ($http, $scope, $timeout, $uibModalInstance, Events, Existing, Form, User) {
 
-        $scope.Existing = Existing;
-
-        console.log($scope.Existing.existing)
         $scope.Events = Events;
+        $scope.Existing = Existing;
         $scope.Form = Form;
         $scope.User = User;
 
@@ -281,39 +264,6 @@ angular.module("DigiDayMdl", ["Factories", "Filters", "ngRoute", "mwl.calendar",
 
         $scope.cancel = function () {
           $uibModalInstance.dismiss("cancel");
-        };
-
-        $scope.showErrorMessage = false;
-        $scope.showSuccessMessage = false;
-
-        $scope.create = function (event) {
-          $scope.User.login(fresher, password, function (message) {
-            $scope.showSuccessMessage = true;
-            $scope.message = message;
-            $timeout(function () {
-              $scope.showSuccessMessage = false;
-              $scope.cancel();
-            }, 500);
-          }, function (message) {
-            $scope.showErrorMessage = true;
-            $scope.message = message;
-            $timeout(function () {
-              $scope.showErrorMessage = false;
-            }, 2500);
-          });
-          console.log(session);
-          $http.post("/DigiDay/php/router.php/session/create", {session: session})
-          .success(function (data, status, headers, config) {
-            if (data.error) {
-              console.log(data);
-            } else {
-              console.log(data);
-            }
-          })
-          .error(function (data, status, headers, config) {
-            console.log(data);
-          });
-          $window.location.reload();
         };
       },
       size: size,

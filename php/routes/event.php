@@ -106,28 +106,30 @@ $router->get("DigiDay/php/routes/event.php/events", function() {
 
 /**
 * Creates an event
-* DA GESTIRE QUANTITA MATERIALE
 */
 $router->post("DigiDay/php/routes/event.php/create", function() {
   require_once "connection.php";
 
   $json = json_decode(file_get_contents('php://input'));
-  $startingDate = date("Y-m-d H:i:s", strtotime(filter_var($json->session->startingDate, FILTER_SANITIZE_STRING)));
-  $endingDate = date("Y-m-d H:i:s", strtotime(filter_var($json->session->endingDate, FILTER_SANITIZE_STRING)));
-  $classroom = filter_var($json->session->classroom->id, FILTER_SANITIZE_STRING);
-  $maxPartecipants = filter_var($json->session->maxPartecipants, FILTER_SANITIZE_STRING);
-  $items = $json->session->items;
-  var_dump($items);
-  $title = filter_var($json->session->title, FILTER_SANITIZE_STRING);
-  $topic = filter_var($json->session->topic->id, FILTER_SANITIZE_STRING);
-  $details = filter_var($json->session->details, FILTER_SANITIZE_STRING);
+  $startingDate = date("Y-m-d H:i:s", strtotime(filter_var($json->event->startingDate, FILTER_SANITIZE_STRING)));
+  $endingDate = date("Y-m-d H:i:s", strtotime(filter_var($json->event->endingDate, FILTER_SANITIZE_STRING)));
+  $classroom = filter_var($json->event->classroom->id, FILTER_SANITIZE_STRING);
+  $maxPartecipants = filter_var($json->event->maxPartecipants, FILTER_SANITIZE_STRING);
+  $items = $json->event->items;
+  $title = filter_var($json->event->title, FILTER_SANITIZE_STRING);
+  $topic = filter_var($json->event->topic->id, FILTER_SANITIZE_STRING);
+  if (isset($json->classroom->features)) {
+    $details = filter_var($json->event->details, FILTER_SANITIZE_STRING);
+  } else {
+    $details = null;
+  }
 
   try {
-    $result = $mysql->query("INSERT INTO Sessione (Titolo, DataInizio, DataFine, NumeroMassimo, Dettagli, MatricolaCreatore, IdAula, IdArgomento) VALUES ('" . $title . "', '" . $startingDate . ':00' . "', '" . $endingDate . ':00' . "', '" . $maxPartecipants . "', '" . $details . "', '" . $creator . "', '" . $_SESSION["user"]["fresher"] . "', '" . $topic . "')");
+    $result = $mysql->query("INSERT INTO Sessione (Titolo, DataInizio, DataFine, NumeroMassimo, Dettagli, MatricolaCreatore, IdAula, IdArgomento) VALUES ('" . $title . "', '" . $startingDate . ':00' . "', '" . $endingDate . ':00' . "', '" . $maxPartecipants . "', '" . $details . "', '" . $_SESSION["user"]["fresher"] . "', '" . $classroom . "', '" . $topic . "')");
     if ($result->rowCount() > 0) {
       $id = $mysql->lastInsertId();
       foreach ($items as $item) {
-        $mysql->query("INSERT INTO Richiede (IdSessione, IdMateriale) VALUES (" . $id . ", " . $item->id . ")");
+        $mysql->query("INSERT INTO Richiede (IdSessione, IdMateriale, Quantita) VALUES (" . $id . ", " . $item->id . ", " . $item->required . ")");
       }
       echo json_encode(array(
         "created" => true,

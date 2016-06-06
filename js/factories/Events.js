@@ -39,17 +39,18 @@ angular.module("Factories").factory("Events", function ($http, User) {
   return {
     calendar: calendar,
 
-    create: function (event) {
-      $http.post("/DigiDay/php/routes/event.php/create", {session: event})
+    create: function (event, successCallback, errorCallback) {
+      $http.post("/DigiDay/php/routes/event.php/create", {event: event})
       .success(function (data, status, headers, config) {
         if (data.created) {
           refresh();
+          successCallback(data.message);
         } else {
-          console.log(data);
+          errorCallback(data.message);
         }
       })
       .error(function (data, status, headers, config) {
-        console.log(data);
+        errorCallback(data.message);
       });
     },
 

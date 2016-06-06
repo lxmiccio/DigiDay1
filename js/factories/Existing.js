@@ -74,7 +74,9 @@ angular.module("Factories").factory("Existing", function ($http) {
           data.items.forEach(function (entry) {
             entry.available = entry.amount;
             if (angular.isArray(entry.events)) {
-
+              entry.events.forEach(function(entry1) {
+                entry.available -= entry1.requiredAmount;
+              });
             }
             existing.items.push(entry);
           });
@@ -89,6 +91,25 @@ angular.module("Factories").factory("Existing", function ($http) {
   };
 
   var refreshTopics = function () {
+    $http.get("/DigiDay/php/routes/get.php/topics")
+    .success(function (data, status, headers, config) {
+      if (data.successful) {
+        existing.topics.length = 0;
+        if (angular.isArray(data.topics)) {
+          data.topics.forEach(function (entry) {
+            existing.topics.push(entry);
+          });
+        }
+      } else {
+        console.log(data);
+      }
+    })
+    .error(function (data, status, headers, config) {
+      console.log(data);
+    });
+  };
+
+  var refreshAllTopics = function () {
     $http.get("/DigiDay/php/routes/get.php/topics")
     .success(function (data, status, headers, config) {
       if (data.successful) {
