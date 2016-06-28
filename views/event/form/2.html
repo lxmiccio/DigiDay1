@@ -3,17 +3,15 @@
     text-align: center !important;
   }
   .dropdown-toggle {
-    border-radius: 5px 5px 0px 0px;
-    height: 34px;
+    border-radius: 5px 5px 0px 0px !important;
   }
   .filter-option, .special-title {
-    margin-left: 7px;
+    margin-left: 7px !important;
     text-align: center !important;
   }
   .form-box .form-control-last {
-    border-radius: 0px 0px 5px 5px;
-    border-top: 0px;
-    margin-top: 0px;
+    border-radius: 0px 0px 5px 5px !important;
+    border-top: 0px !important;
   }
 </style>
 <div class="row">
@@ -21,7 +19,7 @@
     <div class="col-xs-12">
       <div ng-class="sessionForm.classroom.$error.required ? 'has-error' : 'has-success'">
         <ol class="nya-bs-select form-control col-xs-12 text-center" name="classroom" title="Aula" required ng-change="setErrorForm2(newSession)" ng-model="newSession.classroom">
-          <li nya-bs-option="classroom in Existing.existing.classrooms | availableClassrooms:newSession.startingDate:newSession.endingDate | orderBy:'name'">
+          <li nya-bs-option="classroom in Existing.existing.classrooms | available:newSession.startingDate:newSession.endingDate | orderBy:'name'">
             <a>{{classroom.name}}</a>
           </li>
         </ol>

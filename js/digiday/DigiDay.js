@@ -1,4 +1,4 @@
-angular.module("DigiDayMdl", ["Factories", "Filters", "ngRoute", "mwl.calendar", "nya.bootstrap.select", "ui.bootstrap", "ui.router", "AdministratorMdl", "CalendarMdl", "SessionMdl"])
+angular.module("DigiDayMdl", ["Factories", "Filters", "ngRoute", "mwl.calendar", "nya.bootstrap.select", "ui.bootstrap", "ui.router", "AdministratorMdl", "CalendarMdl"])
 
 .config(function ($routeProvider, $stateProvider) {
 
@@ -15,22 +15,22 @@ angular.module("DigiDayMdl", ["Factories", "Filters", "ngRoute", "mwl.calendar",
     templateUrl: "views/calendar/calendar.html"
   });
 
-  $stateProvider.state("session", {
+  $stateProvider.state("event", {
     url: "",
-    templateUrl: "views/session/form/form.html",
+    templateUrl: "views/event/form.html",
     controller: "formController"
-  }).state('session.1', {
+  }).state('event.1', {
     url: "",
-    templateUrl: "views/session/form/1.html"
-  }).state('session.2', {
+    templateUrl: "views/event/form/1.html"
+  }).state('event.2', {
     url: "",
-    templateUrl: "views/session/form/2.html"
-  }).state('session.3', {
+    templateUrl: "views/event/form/2.html"
+  }).state('event.3', {
     url: "",
-    templateUrl: "views/session/form/3.html"
-  }).state('session.4', {
+    templateUrl: "views/event/form/3.html"
+  }).state('event.4', {
     url: "",
-    templateUrl: "views/session/form/4.html"
+    templateUrl: "views/event/form/4.html"
   });
 })
 
@@ -84,7 +84,13 @@ angular.module("DigiDayMdl", ["Factories", "Filters", "ngRoute", "mwl.calendar",
 
   $scope.setErrorForm3 = function (session) {
     $scope.errorForm3 = false;
-
+    if(angular.isArray(session.items)) {
+      session.items.forEach(function (entry) {
+        if(entry.required > entry.available) {
+          $scope.errorForm3 = true;
+        }
+      });
+    }
   };
 
   $scope.setErrorForm4 = function (session) {

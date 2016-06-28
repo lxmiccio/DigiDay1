@@ -10,11 +10,6 @@
             <file>file:/C:/Xampp/htdocs/DigiDay/views/session/session.html</file>
             <file>file:/C:/Xampp/htdocs/DigiDay/views/session/form/form.html</file>
         </group>
-        <group>
-            <file>file:/C:/Xampp/htdocs/DigiDay/views/session/form/2.html</file>
-            <file>file:/C:/Xampp/htdocs/DigiDay/js/digiday/DigiDay.js</file>
-            <file>file:/C:/Xampp/htdocs/DigiDay/views/session/form/1.html</file>
-            <file>file:/C:/Xampp/htdocs/DigiDay/views/session/form/3.html</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

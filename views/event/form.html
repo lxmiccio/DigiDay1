@@ -1,0 +1,92 @@
+<style>
+  .form-box .form-control-first {
+    border-radius: 5px 5px 0px 0px !important;
+  }
+  .form-box .form-control-last {
+    border-radius: 0px 0px 5px 5px !important;
+    border-top: 0 !important;
+  }
+</style>
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="text-center">
+      <h2><label>Crea un Evento</label></h2>
+    </div>
+    <br class="unselectable"/>
+    <div class="form-box">
+      <form name="sessionForm">
+        <div id="form-views" ui-view>
+
+          <script type="text/javascript">
+            $(document).ready(function () {
+              $("#startingDate").bootstrapMaterialDatePicker({
+                cancelText: "Annulla",
+                format: "YYYY-MM-DD HH:mm",
+                lang: "it",
+                minDate: new Date(),
+                okText: "Conferma"
+              }).on("change", function (e, date) {
+                $("#InputEndingDate").bootstrapMaterialDatePicker("setMinDate", date);
+              });
+              $("#endingDate").bootstrapMaterialDatePicker({
+                cancelText: "Annulla",
+                date: false,
+                format: "YYYY-MM-DD HH:mm",
+                lang: "it",
+                minDate: new Date(),
+                okText: "Conferma"
+              });
+            });
+          </script>
+          <div class="row">
+            <div class="form-group">
+              <div class="col-xs-12">
+                <div ng-class="sessionForm.startingDate.$error.required ? 'has-error' : 'has-success'">
+                  <input type="text" class="form-control form-control-first text-center" name="startingDate" id="startingDate" placeholder="Data di Inizio" required ng-change="changeStartingDate(newSession);" ng-model="newSession.startingDate">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-12">
+                <div ng-class="sessionForm.endingDate.$error.required ? 'has-error' : 'has-success'">
+                  <input type="text" class="form-control form-control-last text-center" name="endingDate" id="endingDate" placeholder="Data di Fine" required ng-change="changeEndingDate(newSession);" ng-model="newSession.endingDate">
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </form>
+    </div>
+    <br class="unselectable"/>
+    <div class="row">
+      <div id="status-buttons" class="text-center">
+        <button type="button" class="btn btn-primary btn-sm btn3d" ui-sref-active="active" ui-sref=".1">1</button>
+        <button type="button" class="btn btn-primary btn-sm btn3d" ng-hide="errorForm1" ui-sref-active="active" ui-sref=".2">2</button>
+        <button type="button" class="btn btn-primary btn-sm btn3d" ng-hide="errorForm2" ui-sref-active="active" ui-sref=".3">3</button>
+        <button type="button" class="btn btn-primary btn-sm btn3d" ng-hide="errorForm2 || errorForm3" ui-sref-active="active" ui-sref=".4">4</button>
+        <button type="button" class="btn btn-success btn-sm btn3d" ng-disabled="errorForm1 || errorForm2 || errorForm3 || errorForm4" ng-click="create(newSession)" ng-hide="errorForm1 || errorForm2 || errorForm3 || errorForm4"><span><i class="fa fa-arrow-right" aria-hidden="true"></i></span></button>
+      </div>
+    </div>
+    <br class="unselectable" ngshow="showSuccessMessage || showErrorMessage"/>
+    <div class="row" ng-show="showSuccessMessage">
+      <div class="alert-group">
+        <div class="col-xs-10 col-xs-offset-1">
+          <div class="alert alert-success">
+            <div class="text-center"><strong>{{message}}</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" ng-show="showErrorMessage">
+      <div class="alert-group">
+        <div class="col-xs-10 col-xs-offset-1">
+          <div class="alert alert-danger">
+            <div class="text-center"><strong>{{message}}</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

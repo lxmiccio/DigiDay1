@@ -1,0 +1,30 @@
+<style>
+  .avatar {
+    background-image: url("images/logo.png");
+    background-size: cover;
+    height: 127px;
+    width: 105px;
+  }
+</style>
+<div class="row">
+  <div class="col-xs-10 col-xs-offset-1" ng-show="User.isAuthenticated()">
+    <br class="unselectable"/>
+    <div class="avatar center-block"></div>
+    <br class="unselectable"/>
+    <div id="form-views" ui-view>
+    </div>
+    <br class="unselectable"/>
+  </div>
+  <div class="col-xs-10 col-xs-offset-1" ng-hide="User.isAuthenticated()">
+    <br class="unselectable"/>
+    <div class="avatar center-block"></div>
+    <br class="unselectable"/>
+    <div class="alert-group">
+      <div class="alert alert-danger">
+        <div class="row">
+          <div class="text-center"><strong>Devi essere autenticato per iscriverti alla Sessione</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

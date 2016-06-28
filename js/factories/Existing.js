@@ -6,6 +6,7 @@ angular.module("Factories").factory("Existing", function ($http) {
     classrooms: [],
     items: [],
     topics: [],
+    allTopics: []
   };
 
   var refreshEmails = function() {
@@ -113,14 +114,14 @@ angular.module("Factories").factory("Existing", function ($http) {
     $http.get("/DigiDay/php/routes/get.php/topics")
     .success(function (data, status, headers, config) {
       if (data.successful) {
-        existing.topics.length = 0;
-        existing.topics.push({
+        existing.allTopics.length = 0;
+        existing.allTopics.push({
           id: 0,
           scope: "Tutti"
         });
         if (angular.isArray(data.topics)) {
           data.topics.forEach(function (entry) {
-            existing.topics.push(entry);
+            existing.allTopics.push(entry);
           });
         }
       } else {
@@ -137,10 +138,10 @@ angular.module("Factories").factory("Existing", function ($http) {
   refreshClassrooms();
   refreshItems();
   refreshTopics();
+  refreshAllTopics();
 
   return {
     existing: existing,
-
 
     addEmail: function (email) {
       existing.emails.push(email);

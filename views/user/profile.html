@@ -38,8 +38,11 @@
               <button type="button" class="btn btn-primary btn-sm btn3d" ng-click="openUser('md', 'views/user/updateEmail.html')">Modifica Email</button>
               <button type="button" class="btn btn-primary btn-sm btn3d" ng-click="openUser('md', 'views/user/updatePassword.html')">Modifica Password</button>
             </div>
+            <br class="unselectable"/>
             <div class="row text-center">
-              <button type="button" class="btn btn-danger btn-sm btn3d" ng-click="openUser('md', 'views/user/delete.html')">Elimina Utente</button>
+              <div class="col-xs-8 col-xs-offset-2">
+                <button type="button" class="btn btn-danger btn-block btn-sm btn3d" ng-click="openUser('md', 'views/user/delete.html')">Elimina Utente</button>
+              </div>
             </div>
           </div>
         </div>

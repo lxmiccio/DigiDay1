@@ -82,10 +82,10 @@ $router->get("DigiDay/php/routes/get.php/freshers", function() {
            "name" => $row["name"],
            "capacity" => $row["capacity"],
            "features" => $row["features"],
-           "sessions" => null
+           "events" => null
          );
          if (isset($row["startingDate"]) || isset($row["endingDate"])) {
-           $classrooms[count($classrooms) - 1]["events"] = array(
+           $classrooms[count($classrooms) - 1]["events"][] = array(
              "startingDate" => $row["startingDate"],
              "endingDate" => $row["endingDate"]
            );

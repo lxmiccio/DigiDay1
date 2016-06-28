@@ -1,6 +1,21 @@
-angular.module("CalendarMdl", [])
-
+angular
+.module("CalendarMdl", [])
 .controller("CalendarCtrl", function ($http, $scope, $uibModal, Events, Existing) {
+
+  var vm = this;
+
+  vm.Events = Events;
+  vm.Existing = Existing;
+
+  vm.Events.refresh();
+  vm.Existing.refreshTopics();
+
+  vm.calendarView = 'month';
+  vm.viewDate = new Date();
+
+  vm.eventClicked = function (event) {
+    $scope.openEvent("lg", "views/calendar/event.html", event);
+  };
 
   $scope.openEvent = function (size, view, event) {
     var modalInstance = $uibModal.open({
@@ -190,18 +205,4 @@ angular.module("CalendarMdl", [])
     });
   };
 
-  var vm = this;
-
-  vm.Events = Events;
-  vm.Existing = Existing;
-
-  vm.Events.refresh();
-  vm.Existing.refreshTopics();
-
-  vm.calendarView = 'month';
-  vm.viewDate = new Date();
-
-  vm.eventClicked = function (event) {
-    $scope.openEvent("lg", "views/calendar/session.html", event);
-  };
 });
